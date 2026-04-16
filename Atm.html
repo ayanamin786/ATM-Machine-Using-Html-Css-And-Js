@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Royal ATM Machine</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: linear-gradient(135deg,#0f0c29,#302b63,#24243e);
+}
+
+/* Amount Display */
+#amount{
+margin-top: 10px;
+    padding:15px 25px;
+    border-radius:30px;
+    background: linear-gradient(45deg,gold,#ffcc00);
+    color:black;
+    font-weight:bold;
+    font-size:18px;
+
+}
+
+/* Card */
+.filed{
+    width:350px;
+    padding:40px;
+    border-radius:20px;
+    backdrop-filter: blur(15px);
+    background: rgba(255,255,255,0.05);
+    border:1px solid rgba(255,215,0,0.3);
+    box-shadow: 0 0 30px rgba(255,215,0,0.3);
+    text-align:center;
+}
+
+.filed::before{
+    content:"ROYAL ATM";
+    display:block;
+    color:gold;
+    font-size:22px;
+    font-weight:bold;
+    margin-bottom:25px;
+}
+
+.filed input{
+    width:100%;
+    padding:12px;
+    margin:12px 0;
+    border-radius:10px;
+    border:none;
+    outline:none;
+    background: rgba(255,255,255,0.1);
+    color:white;
+    border:1px solid rgba(255,215,0,0.4);
+}
+
+.filed button{
+    width:100%;
+    padding:12px;
+    margin-top:15px;
+    border:none;
+    border-radius:30px;
+    background: linear-gradient(45deg,gold,#ffcc00);
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.filed button:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 15px gold;
+}
+
+.hidden{
+    display:none;
+}
+
+</style>
+</head>
+
+<body>
+
+
+
+<div class="filed">
+
+    <!-- Login Section -->
+    <div id="loginBox">
+        <input type="text" id="inp" placeholder="Enter Account Number">
+        <input type="password" id="pass" placeholder="Enter PIN">
+        <button onclick="login()">Login</button>
+    </div>
+
+    <!-- ATM Menu -->
+    <div id="atmBox" class="hidden">
+        <input type="number" id="money" placeholder="Enter Amount">
+        <button onclick="deposit()">Deposit</button>
+        <button onclick="withdraw()">Withdraw</button>
+    </div>
+<h1 id="amount">Balance: Rs <span id="amnt">0</span></h1>
+</div>
+
+<script>
+
+let balance = 4000; // Default Balance
+
+function login(){
+    let acc = document.getElementById("inp").value;
+    let pin = document.getElementById("pass").value;
+
+    if(acc == "91022222" && pin == "9103"){
+        document.getElementById("loginBox").classList.add("hidden");
+        document.getElementById("atmBox").classList.remove("hidden");
+        document.getElementById("amount").style.display = "block";
+        document.getElementById("amnt").innerText = balance;
+        alert("Login Successful ✅");
+    }else if(acc == "888888" && pin == "2026"){
+        document.getElementById("loginBox").classList.add("hidden");
+        document.getElementById("atmBox").classList.remove("hidden");
+        document.getElementById("amount").style.display = "block";
+        document.getElementById("amnt").innerText = balance;
+        alert("Login Successful ✅");
+    }else if(acc == "202622" && pin == "3019"){
+        document.getElementById("loginBox").classList.add("hidden");
+        document.getElementById("atmBox").classList.remove("hidden");
+        document.getElementById("amount").style.display = "block";
+        document.getElementById("amnt").innerText = 2300;
+        alert("Login Successful ✅");
+    }else{
+        alert("Invalid Account or PIN ❌");
+    }
+}
+
+function deposit(){
+    let amount = parseInt(document.getElementById("money").value);
+    if(amount > 0){
+        balance += amount;
+        document.getElementById("amnt").innerText = balance;
+        alert("Deposit Successful 💰");
+    }else{
+        alert("Enter Valid Amount");
+    }
+}
+
+function withdraw(){
+    let amount = parseInt(document.getElementById("money").value);
+    if(amount > 0 && amount <= balance){
+        balance -= amount;
+        document.getElementById("amnt").innerText = balance;
+        alert("Withdraw Successful 💸");
+    }else{
+        alert("Insufficient Balance ❌");
+    }
+}  
+
+</script>
+
+</body>
+</html>
